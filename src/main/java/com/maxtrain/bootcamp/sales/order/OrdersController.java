@@ -20,7 +20,7 @@ public class OrdersController {
 	}
 	
 	// by PK
-	@GetMapping({"id"})
+	@GetMapping("{id}")
 	public ResponseEntity<Orders> getOrder(@PathVariable int id) {
 		var Orders = ordRepo.findById(id);
 		if(Orders.isEmpty()) {
@@ -54,17 +54,4 @@ public class OrdersController {
 			ordRepo.save(order);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-		/*///delete
-		@SuppressWarnings("rawtypes")
-		@DeleteMapping("{id}")
-		public ResponseEntity deleteOrder(@PathVariable int id) {
-			var order = ordRepo.findById(id);
-			if (order.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}
-			ordRepo.delete(order.get());
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
-			
-		}
-		*/
 }
