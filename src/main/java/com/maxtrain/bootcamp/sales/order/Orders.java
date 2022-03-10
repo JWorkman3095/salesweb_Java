@@ -15,6 +15,9 @@ public class Orders {
 	private String description;
 	@Column(columnDefinition="decimal(9,2) NOT NULL")
 	private double total;
+	//custom like for Capstone
+	@Column(length=30, nullable=false)
+	private String status;
 	
 	// ManyToOne many orders for one customer, optional to false means can not be null
 	// establishes FK
@@ -50,6 +53,18 @@ public class Orders {
 	public void setTotal(double total) {
 		this.total = total;
 	}
+	
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 	public Customer getCustomer() {
 		return customer;

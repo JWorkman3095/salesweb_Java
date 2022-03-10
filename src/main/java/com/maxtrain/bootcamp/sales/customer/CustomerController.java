@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
-//sending and recieveing json
+//sending and receiving json
 @RestController
 @RequestMapping("/api/customers")
 
@@ -33,6 +33,17 @@ public class CustomerController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Customer>(customer.get(), HttpStatus.OK);
+	}
+	
+	// #5 read by code similar to login in Capstone built like PK
+	@GetMapping ("code/{code}")
+	public ResponseEntity<Customer> getCustomerByCode(@PathVariable String code) {
+		var cust = custRepo.findByCode(code);
+		if(cust.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		//must call get to retrieve the cust at var above
+		return new ResponseEntity<Customer>(cust.get(), HttpStatus.OK);
 	}
 	
 	//add post
