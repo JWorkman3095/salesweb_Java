@@ -1,10 +1,10 @@
 package com.maxtrain.bootcamp.sales.order;
 
 import javax.persistence.*;
+
 import com.maxtrain.bootcamp.sales.customer.Customer;
 
 @Entity
-
 public class Orders {
 	
 	@Id

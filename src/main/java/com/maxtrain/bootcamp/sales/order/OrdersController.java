@@ -1,38 +1,26 @@
 package com.maxtrain.bootcamp.sales.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-//import com.maxtrain.bootcamp.sales.order.Order; these were customer
-//import com.maxtrain.bootcamp.sales.order.OrderRepository;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
-//sending and recieveing json
+//sending and receiving json
 @RestController
-@RequestMapping("/api/customers")
-
-public class OrdersController {
-	
+@RequestMapping("/api/orders")
+public class OrdersController {	
 	@Autowired
 	//variable for repo
 	private OrdersRepository ordRepo;
 	
 	@GetMapping
-	public ResponseEntity<Iterable<Orders>> GetOrders() {
+	public ResponseEntity<Iterable<Orders>> getOrders() {
 		var orders = ordRepo.findAll();
 		return new ResponseEntity<Iterable<Orders>>(orders, HttpStatus.OK);
 	}
+	
 	// by PK
+	@GetMapping({"id"})
 	public ResponseEntity<Orders> getOrder(@PathVariable int id) {
 		var Orders = ordRepo.findById(id);
 		if(Orders.isEmpty()) {
@@ -40,6 +28,7 @@ public class OrdersController {
 		}
 		return new ResponseEntity<Orders>(Orders.get(), HttpStatus.OK);
 	}
+	
 	//add post
 	@PostMapping
 	public ResponseEntity<Orders> postOrder(@RequestBody Orders order) {
@@ -65,7 +54,7 @@ public class OrdersController {
 			ordRepo.save(order);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-		//delete
+		/*///delete
 		@SuppressWarnings("rawtypes")
 		@DeleteMapping("{id}")
 		public ResponseEntity deleteOrder(@PathVariable int id) {
@@ -77,4 +66,5 @@ public class OrdersController {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 			
 		}
+		*/
 }
